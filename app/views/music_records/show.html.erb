@@ -1,0 +1,29 @@
+<p>
+  <strong>Title:</strong>
+  <%= @music_record.title %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @music_record.description %>
+</p>
+
+<p>
+  <strong>Price:</strong>
+  <%= @music_record.price %>
+</p>
+
+<p>
+  <strong>Damage Assessment:</strong>
+  <%= @music_record.damage_assessment %>
+</p>
+
+<% if @music_record.photo.attached? %>
+  <p>
+    <strong>Photo:</strong>
+    <%= image_tag @music_record.photo %>
+  </p>
+<% end %>
+
+<%= link_to 'Edit', edit_music_record_path(@music_record) %> |
+<%= link_to 'Back', music_records_path %>
