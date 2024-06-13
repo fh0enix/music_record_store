@@ -1,0 +1,13 @@
+<h1>Music Records</h1>
+
+<%= link_to 'New Music Record', new_music_record_path %>
+
+<ul>
+  <% @music_records.each do |music_record| %>
+    <li>
+      <%= link_to music_record.title, music_record %>
+      (<%= link_to 'Edit', edit_music_record_path(music_record) %>,
+       <%= link_to 'Destroy', music_record, method: :delete, data: { confirm: 'Are you sure?' } %>)
+    </li>
+  <% end %>
+</ul>
