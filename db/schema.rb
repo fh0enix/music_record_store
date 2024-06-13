@@ -10,7 +10,38 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_06_13_127777) do
+ActiveRecord::Schema[7.1].define(version: 2024_06_13_127780) do
+  create_table "music_records", force: :cascade do |t|
+    t.string "title"
+    t.decimal "price"
+    t.text "description"
+    t.string "damage_assessment"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "orders", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "music_record_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["music_record_id"], name: "index_orders_on_music_record_id"
+    t.index ["user_id"], name: "index_orders_on_user_id"
+  end
+
+  create_table "rentals", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "music_record_id", null: false
+    t.date "rent_date"
+    t.decimal "price"
+    t.text "note"
+    t.string "damage_assessment"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["music_record_id"], name: "index_rentals_on_music_record_id"
+    t.index ["user_id"], name: "index_rentals_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -27,4 +58,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_13_127777) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "orders", "music_records"
+  add_foreign_key "orders", "users"
+  add_foreign_key "rentals", "music_records"
+  add_foreign_key "rentals", "users"
 end
